@@ -4,6 +4,13 @@ Versión para navegador del clásico **GORILLA.BAS**, el juego que venía con QB
 
 Hecho con **HTML, CSS y JavaScript puro** (sin librerías ni frameworks) y dibujado sobre un elemento `<canvas>`.
 
+---
+
+![screenshot](screenshots/img-gorilas-js-2.jpg)
+![screenshot](screenshots/img-gorilas-js-1.jpg)
+
+---
+
 **▶ Jugar online:** https://juan1639.github.io/Gorilas-vanillajs/
 
 ## Cómo se juega
