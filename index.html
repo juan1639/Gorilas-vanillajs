@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gorilas</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="contenedor">
+    <header class="cabecera">
+      <h1>GORILAS</h1>
+      <p class="subtitulo">By Juan Eguía, 2026 (versión del gorillas en qbasic para MS-DOS)</p>
+      <button id="sonido" type="button" class="boton-sonido" aria-pressed="true">Sonido: sí</button>
+    </header>
+
+    <div class="pantalla">
+      <canvas id="juego" width="800" height="500" aria-label="Tablero de juego de Gorilas"></canvas>
+
+      <form id="menu" class="menu" autocomplete="off">
+        <h2>Nueva partida</h2>
+        <label for="nombre1">Jugador 1
+          <input id="nombre1" maxlength="10" value="Jugador 1" required>
+        </label>
+        <label for="nombre2">Jugador 2
+          <input id="nombre2" maxlength="10" value="Jugador 2" required>
+        </label>
+        <label for="objetivo">Puntos para ganar
+          <input id="objetivo" type="number" min="1" max="20" value="3" required>
+        </label>
+        <label for="gravedad">Gravedad (m/s²)
+          <input id="gravedad" type="number" min="1" max="50" step="0.1" value="9.8" required>
+        </label>
+        <button id="jugar" type="submit">Jugar</button>
+      </form>
+    </div>
+
+    <div id="teclado" class="teclado" aria-label="Teclado numérico">
+      <button type="button" data-tecla="7">7</button>
+      <button type="button" data-tecla="8">8</button>
+      <button type="button" data-tecla="9">9</button>
+      <button type="button" data-tecla="Backspace">Borrar</button>
+      <button type="button" data-tecla="4">4</button>
+      <button type="button" data-tecla="5">5</button>
+      <button type="button" data-tecla="6">6</button>
+      <button type="button" data-tecla="Escape">Menú</button>
+      <button type="button" data-tecla="1">1</button>
+      <button type="button" data-tecla="2">2</button>
+      <button type="button" data-tecla="3">3</button>
+      <button type="button" data-tecla="Enter" class="ok">OK</button>
+      <button type="button" data-tecla="0" class="cero">0</button>
+      <button type="button" data-tecla=".">.</button>
+    </div>
+
+    <section class="ayuda">
+      <h2>Cómo se juega</h2>
+      <p>Por turnos, escribe el <strong>ángulo</strong> (0 a 180 grados) y pulsa <kbd>Enter</kbd>; después la <strong>velocidad</strong> (1 a 200) y <kbd>Enter</kbd>. El plátano tiene en cuenta la gravedad y el viento que marca la flecha bajo el sol. Gana la ronda quien acierte al otro gorila; si te das a ti mismo, el punto es del rival.</p>
+      <p>Al terminar la partida: <kbd>Enter</kbd> para la revancha, <kbd>Esc</kbd> para volver al menú.</p>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

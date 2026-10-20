@@ -1,0 +1,184 @@
+/* Estética de pantalla EGA de MS-DOS: azul profundo, cian y amarillo, letra de terminal. */
+:root {
+  --fondo: #0a0a2e;
+  --azul-dos: #0000aa;
+  --cian: #00a8a8;
+  --amarillo: #fcfc54;
+  --texto: #e8e8f4;
+  --texto-suave: #a8a8c8;
+  --borde: #a8a8a8;
+  --rojo: #fc5454;
+  --fuente: "VT323", "Courier New", Courier, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body { background: var(--fondo); color: var(--texto); }
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 20px;
+  line-height: 1.3;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 16px 32px;
+}
+
+.contenedor {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cabecera { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 20px; }
+
+h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--amarillo);
+  text-shadow: 3px 3px 0 var(--rojo);
+  line-height: 1;
+}
+
+.subtitulo { margin: 0; color: var(--texto-suave); }
+
+.boton-sonido {
+  margin-left: auto;
+  font: inherit;
+  cursor: pointer;
+  color: var(--texto);
+  background: transparent;
+  border: 2px solid var(--borde);
+  padding: 0 10px;
+}
+.boton-sonido[aria-pressed="false"] { color: var(--texto-suave); border-style: dashed; }
+.boton-sonido:hover { border-color: var(--amarillo); }
+.boton-sonido:focus-visible { outline: 2px solid var(--amarillo); outline-offset: 2px; }
+
+.pantalla {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  border: 4px solid var(--borde);
+  background: var(--azul-dos);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+
+/* Menú con aspecto de cuadro de diálogo de QBasic */
+.menu {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: min(360px, 92%);
+  max-height: 96%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 20px;
+  background: var(--azul-dos);
+  border: 3px double var(--texto);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.menu h2 {
+  margin: 0 0 4px;
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  color: var(--amarillo);
+  letter-spacing: 0.06em;
+}
+
+.menu label { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+
+.menu input {
+  flex: 0 0 8em;
+  width: 8em;
+  min-width: 0;
+  font: inherit;
+  color: var(--texto);
+  background: var(--fondo);
+  border: 2px solid var(--cian);
+  padding: 0 6px;
+}
+
+.menu input:focus-visible { outline: 2px solid var(--amarillo); outline-offset: 1px; }
+
+.menu button, .teclado button {
+  font: inherit;
+  cursor: pointer;
+  color: var(--fondo);
+  background: var(--cian);
+  border: none;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.menu button { margin-top: 6px; padding: 4px; font-size: 26px; }
+
+.menu button:hover, .teclado button:hover { background: var(--amarillo); }
+.menu button:focus-visible, .teclado button:focus-visible { outline: 2px solid var(--amarillo); outline-offset: 2px; }
+.menu button:active, .teclado button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+
+/* Teclado numérico solo en pantallas táctiles */
+.teclado {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.teclado button { padding: 8px 0; font-size: 24px; }
+.teclado .ok { grid-row: span 2; background: var(--amarillo); }
+.teclado .cero { grid-column: span 2; }
+
+@media (pointer: coarse) {
+  .teclado { display: grid; }
+}
+
+.ayuda { max-width: 65ch; color: var(--texto-suave); }
+.ayuda h2 { margin: 0 0 6px; font-size: 26px; font-weight: 400; color: var(--cian); }
+.ayuda p { margin: 0 0 8px; }
+.ayuda strong { color: var(--texto); font-weight: 400; }
+
+kbd {
+  font-family: inherit;
+  color: var(--fondo);
+  background: var(--borde);
+  padding: 0 6px;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 42px; }
+  body { font-size: 18px; }
+  /* En móvil el menú va debajo del tablero en lugar de encima */
+  .menu {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-height: none;
+    border-width: 3px 0 0;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu button:active, .teclado button:active { transform: none; }
+}
